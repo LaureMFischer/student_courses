@@ -31,6 +31,30 @@ group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
+group :development do
+  # Add model attributes
+  gem 'annotate'
+end
+
+group :test do
+  gem 'faker'
+  gem 'chronic'
+end
+
+group :development, :test do
+  gem 'pry-rails'
+  gem 'pry-nav'
+  gem 'pry-stack_explorer'
+  # Turn off verbose logging of asset requests
+  gem 'quiet_assets'
+  # see Railscast for better_error gem
+  # http://railscasts.com/episodes/402-better-errors-railspanel
+  # FOR sublime text 3 MUST INSTALL sublime-url-protocol-mac, http://goo.gl/8KX1lb
+  # http://goo.gl/8KX1lb
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

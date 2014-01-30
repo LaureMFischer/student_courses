@@ -1,0 +1,18 @@
+<p>
+  <strong>Name</strong>
+  <%= @student.name %>
+</p>
+<table>
+  <tr><th>Course Name</th></tr>
+  <% @student.courses.each do |course| %>
+    <tr><td><%= course.name %></td></tr>
+  <% end %>
+</table>
+
+<h3><%= link_to "All Students", students_path %></h3>
+
+<%= form_for :membership, url: memberships_path do |f| %>
+  <%= f.collection_select :course_id, Course.all, :id, :name %>
+  <%= f.hidden_field :student_id, value: @student.id %>
+  <%= f.submit "Add to Course" %>
+<% end %>

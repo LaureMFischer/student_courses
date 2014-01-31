@@ -1,7 +1,11 @@
 <table> All Courses
   <tr><th>Name</th><th>Actions</th><tr>
     <% @courses.each do |course| %>
-    <tr><td><%= course.name %></td><td><%=link_to "Show", course_path(course) %></td></tr>
+    <tr>
+      <td><%= course.name %></td>
+      <td><%=link_to "Show", course_path(course) %></td>
+      <td><%= link_to "Delete", course_path(course), method: :delete %> </td>
+    </tr>
     <% end %>
 </table>
 

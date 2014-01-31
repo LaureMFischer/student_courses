@@ -1,8 +1,10 @@
 <p>
   <strong>Course Name</strong>
   <%= @course.name %>
-  <strong>Average Grade</strong>
-  <%= '%3.2f' % @course.memberships.average(:final_grade) %>
+  <% if !@course.memberships.empty? && !@course.memberships.map(&:final_grade).compact.empty? %>
+    <strong>Average Grade</strong>
+    <%= '%3.2f' % @course.memberships.average(:final_grade) %>
+  <% end %>
 </p>
 
 <!-- Students in this course -->

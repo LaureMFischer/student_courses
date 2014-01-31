@@ -13,7 +13,7 @@
   <% @course.memberships.each do |membership| %>
     <tr>
       <td><%= membership.student.name %></td>
-      <td><%= (membership.final_grade ? membership.final_grade : 'N/A') %></td>
+      <td><%= final_grade(membership) %></td>
       <td>
         <%= form_for :membership, url: membership_path(membership), method: 'delete' do |f| %>
         <%= f.submit "Remove Student" %>

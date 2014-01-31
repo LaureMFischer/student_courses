@@ -1,16 +1,19 @@
 <p>
-  <strong>Name</strong>
+  <strong>Course Name</strong>
   <%= @course.name %>
   <strong>Average Grade</strong>
-  <%= @course.memberships.average(:final_grade) %>
+  <%= '%3.2f' % @course.memberships.average(:final_grade) %>
 </p>
+
+<!-- Students in this course -->
 <table>
   <tr><th>Student Name</th><th>Final Grade</th></tr>
   <% @course.memberships.each do |membership| %>
     <tr>
       <td><%= membership.student.name %></td>
       <td><%= (membership.final_grade ? membership.final_grade : 'N/A') %></td>
-      <td><%= form_for :membership, url: membership_path(membership), method: 'put' do |f| %>
+      <td>
+        <%= form_for :membership, url: membership_path(membership), method: 'put' do |f| %>
           <%= f.text_field :final_grade %>
           <%= f.submit "Update Final Grade" %>
         <% end %>
@@ -20,10 +23,11 @@
 </table>
 
 <h3><%= link_to "All Courses", courses_path %></h3>
-
-<%= form_for :membership, url: memberships_path do |f| %>
-  <%= f.collection_select :student_id, Student.all, :id, :name %>
-  <%= f.hidden_field :course_id, value: @course.id %>
-  <%= f.submit "Add Student" %>
+<% if @course.can_add_students? %>
+  <h3>Add Students</h3>
+  <%= form_for :membership, url: memberships_path do |f| %>
+    <%= f.collection_select :student_id, @course.students_to_add, :id, :name %>
+    <%= f.hidden_field :course_id, value: @course.id %>
+    <%= f.submit "Add Student" %>
+  <% end %>
 <% end %>
-

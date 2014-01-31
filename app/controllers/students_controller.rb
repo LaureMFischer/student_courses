@@ -15,6 +15,12 @@ class StudentsController < ApplicationController
     @student = Student.create(student_params)
     redirect_to students_path
   end
+
+  def destroy
+    Student.find(params[:id]).destroy!
+    redirect_to :back
+  end
+  
   private 
 
   def student_params

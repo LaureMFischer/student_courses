@@ -3,7 +3,7 @@ StudentCourses::Application.routes.draw do
   resources :courses
   resources :memberships
 
-  root 'students#index'
+  root 'courses#index'
 
   # See how all your routes lay out with "rake routes".
 

@@ -3,9 +3,17 @@
   <%= @student.name %>
 </p>
 <table>
-  <tr><th>Course Name</th></tr>
-  <% @student.courses.each do |course| %>
-    <tr><td><%= course.name %></td></tr>
+  <tr><th>Course Name</th><th>Grade</th></tr>
+  <% @student.memberships.each do |membership| %>
+    <tr>
+      <td><%= membership.course.name %></td> 
+      <td><%= membership.final_grade %></td>
+      <td><%= form_for :membership, url: membership_path(membership), method: 'put' do |f| %>
+          <%= f.text_field :final_grade %>
+          <%= f.submit "Update Final Grade" %>
+        <% end %>
+      </td>
+    </tr>
   <% end %>
 </table>
 

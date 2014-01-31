@@ -1,11 +1,21 @@
 <p>
   <strong>Name</strong>
   <%= @course.name %>
+  <strong>Average Grade</strong>
+  <%= @course.memberships.average(:final_grade) %>
 </p>
 <table>
-  <tr><th>Student Name</th></tr>
-  <% @course.students.each do |student| %>
-    <tr><td><%= student.name %></td></tr>
+  <tr><th>Student Name</th><th>Final Grade</th></tr>
+  <% @course.memberships.each do |membership| %>
+    <tr>
+      <td><%= membership.student.name %></td>
+      <td><%= (membership.final_grade ? membership.final_grade : 'N/A') %></td>
+      <td><%= form_for :membership, url: membership_path(membership), method: 'put' do |f| %>
+          <%= f.text_field :final_grade %>
+          <%= f.submit "Update Final Grade" %>
+        <% end %>
+      </td>
+    </tr>
   <% end %>
 </table>
 

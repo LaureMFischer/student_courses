@@ -10,6 +10,12 @@ def create
   Membership.create!(membership_params)
   redirect_to :back
 end
+
+def destroy
+  Membership.find(params[:id]).destroy!
+  redirect_to :back
+end
+
 private
 
   def membership_params

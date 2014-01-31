@@ -7,18 +7,7 @@
 <!-- Students in this course -->
 <table>
   <tr><th>Student Name</th><th>Final Grade</th></tr>
-  <% @course.memberships.each do |membership| %>
-    <tr>
-      <td><%= membership.student.name %></td>
-      <td><%= final_grade(membership) %></td>
-      <td>
-        <%= render partial: 'remove_student', locals: {membership: membership} %>
-      </td>
-      <td>
-        <%= render partial: 'update_final_grade', locals: {membership: membership} %>
-      </td>
-    </tr>
-  <% end %>
+  <%= render partial: 'membership', collection: @course.memberships %>
 </table>
 
 <%= render partial: 'add_students', locals: {course: @course} %>

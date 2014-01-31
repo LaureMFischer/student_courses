@@ -1,0 +1,11 @@
+
+    <tr>
+      <td><%= membership.student.name %></td>
+      <td><%= final_grade(membership) %></td>
+      <td>
+        <%= render partial: 'remove_student', locals: {membership: membership} %>
+      </td>
+      <td>
+        <%= render partial: 'update_final_grade', locals: {membership: membership} %>
+      </td>
+    </tr>

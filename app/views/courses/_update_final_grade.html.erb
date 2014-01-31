@@ -1,0 +1,4 @@
+<%= form_for :membership, url: membership_path(membership), method: 'put' do |f| %>
+  <%= f.text_field :final_grade %>
+  <%= f.submit "Update Final Grade" %>
+<% end %>

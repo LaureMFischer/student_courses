@@ -1,10 +1,7 @@
 <p>
   <strong>Course Name</strong>
   <%= @course.name %>
-  <% if !@course.memberships.empty? && !@course.memberships.map(&:final_grade).compact.empty? %>
-    <strong>Average Grade</strong>
-    <%= '%3.2f' % @course.memberships.average(:final_grade) %>
-  <% end %>
+  <%= avg_grade(@course) %>
 </p>
 
 <!-- Students in this course -->
@@ -15,15 +12,10 @@
       <td><%= membership.student.name %></td>
       <td><%= final_grade(membership) %></td>
       <td>
-        <%= form_for :membership, url: membership_path(membership), method: 'delete' do |f| %>
-        <%= f.submit "Remove Student" %>
-        <% end %>        
+        <%= render partial: 'remove_student', locals: {membership: membership} %>
       </td>
       <td>
-        <%= form_for :membership, url: membership_path(membership), method: 'put' do |f| %>
-          <%= f.text_field :final_grade %>
-          <%= f.submit "Update Final Grade" %>
-        <% end %>
+        <%= render partial: 'update_final_grade', locals: {membership: membership} %>
       </td>
     </tr>
   <% end %>

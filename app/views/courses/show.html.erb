@@ -21,12 +21,4 @@
   <% end %>
 </table>
 
-<h3><%= link_to "All Courses", courses_path %></h3>
-<% if @course.can_add_students? %>
-  <h3>Add Students</h3>
-  <%= form_for :membership, url: memberships_path do |f| %>
-    <%= f.collection_select :student_id, @course.students_to_add, :id, :name %>
-    <%= f.hidden_field :course_id, value: @course.id %>
-    <%= f.submit "Add Student" %>
-  <% end %>
-<% end %>
+<%= render partial: 'add_students', locals: {course: @course} %>
